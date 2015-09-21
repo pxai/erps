@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.cuatrovientos.maven</groupId>
+  <artifactId>mavenprofiles</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>mavenprofiles</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  <profiles>
+    <!-- Maven will apply this by default as we set in $HOME/.m2/settings.xml -->
+    <!-- mvn install -Denvironment.type=dev -->
+          <profile>
+            <id>development</id>
+            <activation>
+                <property>
+                    <name>environment.type</name>
+                    <value>dev</value>
+                </property>
+            </activation>
+            <properties>
+               <app.name>My super App dev mode</app.name>
+               <other>Other property dev mode</other>
+               <app.greet>Hello development</app.greet>
+               <database.driver>org.sqlite.JDBC</database.driver>
+               <database.url>jdbc:sqlite:test.db</database.url>
+            </properties>
+    </profile>
+    <!-- mvn install -Denvironment.type=production -->
+      <profile>
+            <id>production</id>
+            <activation>
+                <property>
+                    <name>environment.type</name>
+                    <value>production</value>
+                </property>
+            </activation>
+            <properties>
+     		   <app.name>My Super App in Production</app.name>
+               <other>Other property in production</other>
+               <app.greet>Hello in production</app.greet>
+               <database.driver>com.mysql.jdbc.Driver</database.driver>
+               <database.url>jdbc:mysql://localhost/test</database.url>
+            </properties>
+    </profile>
+   
+</profiles>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+   <!-- We need this if we want the props to be populated on resource files -->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>
