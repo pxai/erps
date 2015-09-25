@@ -18,7 +18,7 @@
     <!-- Maven will apply this by default as we set in $HOME/.m2/settings.xml -->
     <!-- mvn install -Denvironment.type=dev -->
           <profile>
-            <id>development</id>
+            <id>dev</id>
             <activation>
                 <property>
                     <name>environment.type</name>
